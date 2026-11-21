@@ -1,6 +1,6 @@
 {
-  "id": "YOUR_KAGGLE_USERNAME/tamil-ai-webseries-worker",
-  "title": "Tamil AI Webseries Worker",
+  "id": "alexytcreative/alaparai-aruvadai-worker",
+  "title": "Alaparai Aruvadai Worker",
   "code_file": "render_episode.py",
   "language": "python",
   "kernel_type": "script",
@@ -9,7 +9,7 @@
   "enable_tpu": false,
   "enable_internet": true,
   "dataset_sources": [
-    "YOUR_KAGGLE_USERNAME/cast-assets"
+    "alexytcreative/sdxl-lightning-weights"
   ],
   "competition_sources": [],
   "kernel_sources": []

@@ -1,0 +1,96 @@
+{
+  "style_prefix": "Viral 3D anthropomorphic animal animation, Pixar and Unreal Engine 5 cinematic style, hyper-realistic fur textures with expressive human-like cartoon eyes and mouth, dramatic South Indian lighting, 9:16 vertical framing",
+  "characters": {
+    "vellai_puli_vendhan_poor": {
+      "display_name": "Vellai Puli Vendhan",
+      "species": "White Tiger (Daily Worker)",
+      "reference_images": [
+        "/kaggle/input/cast-assets/vendhan_poor.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic muscular white tiger with striking black stripes and bright ice-blue eyes, noble tired face, wearing a sweat-stained faded blue checkered lungi and a worn-out grey cotton shirt with a towel over his shoulder",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_deep_warm",
+        "pitch": "-6%",
+        "speed": "0.98"
+      }
+    },
+    "vellai_puli_vendhan_rich": {
+      "display_name": "Vellai Puli Vendhan (CEO)",
+      "species": "White Tiger (Multi-Millionaire)",
+      "reference_images": [
+        "/kaggle/input/cast-assets/vendhan_rich.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic powerful white tiger with immaculate snow-white fur, sharp black stripes, confident ice-blue eyes, wearing a tailored royal navy three-piece luxury business suit, gold watch, silk tie, billionaire CEO aura",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_deep_warm",
+        "pitch": "-8%",
+        "speed": "0.95"
+      }
+    },
+    "soppana_sundari": {
+      "display_name": "Soppana Sundari",
+      "species": "Lioness",
+      "reference_images": [
+        "/kaggle/input/cast-assets/sundari_front.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic glamorous golden-tan female lioness with sleek fur, heavy eye makeup, arrogant arched eyebrows, wearing a flashy bright red designer silk saree with heavy gold jewelry and sunglasses",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_female_fiery",
+        "pitch": "+8%",
+        "speed": "1.08"
+      }
+    },
+    "vengai_mavan": {
+      "display_name": "Vengai Mavan",
+      "species": "Black Leopard",
+      "reference_images": [
+        "/kaggle/input/cast-assets/vengai_front.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic sleek jet-black panther leopard with glossy dark fur, sinister glowing amber eyes, smug grin, wearing a flashy black leather jacket with gold chains and tinted aviator sunglasses",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_dramatic",
+        "pitch": "-4%",
+        "speed": "1.05"
+      }
+    },
+    "super_subbaiah": {
+      "display_name": "Super Subbaiah",
+      "species": "White Tiger + Lion Hybrid Cub (Male)",
+      "reference_images": [
+        "/kaggle/input/cast-assets/subbaiah_cub.png"
+      ],
+      "sdxl_base_prompt": "adorable anthropomorphic 7-year-old male hybrid cub mixing white tiger and lion features, creamy snow-white fur with faint light-grey tiger stripes, fluffy golden-cream lion cub neck tuft and round lion ears, big innocent eyes, wearing a simple yellow t-shirt and shorts",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_fast_high",
+        "pitch": "+22%",
+        "speed": "1.05"
+      }
+    },
+    "sandai_saroja": {
+      "display_name": "Sandai Saroja",
+      "species": "White Tiger + Lion Hybrid Cub (Female)",
+      "reference_images": [
+        "/kaggle/input/cast-assets/saroja_cub.png"
+      ],
+      "sdxl_base_prompt": "adorable anthropomorphic 9-year-old female hybrid cub mixing white tiger and lion features, creamy white fur with delicate silver-grey tiger stripes, round lion cub ears with a small red hair ribbon, fierce protective big eyes, wearing a simple green pavadai sattai",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_female_fiery",
+        "pitch": "+20%",
+        "speed": "1.10"
+      }
+    },
+    "thanga_thamarai": {
+      "display_name": "Thanga Thamarai",
+      "species": "Golden Tigress",
+      "reference_images": [
+        "/kaggle/input/cast-assets/thamarai_front.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic graceful golden-orange tigress with warm gentle hazel eyes, kind humble smile, jasmine flowers (mallipoo) tucked behind her ear, wearing a dignified pastel peach handloom cotton saree with a small bindi",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_female_fiery",
+        "pitch": "-2%",
+        "speed": "0.95"
+      }
+    }
+  }
+}

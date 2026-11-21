@@ -3,6 +3,14 @@ import json
 import os
 import sys
 from pathlib import Path
+
+# Ensure dependencies are available inside Kaggle environment
+try:
+    import diffusers
+except ImportError:
+    print("[Worker] Installing required libraries inside Kaggle VM...", flush=True)
+    os.system("pip install -q diffusers transformers accelerate safetensors imageio-ffmpeg")
+
 import torch
 from diffusers import (
     StableDiffusionXLPipeline,
@@ -24,11 +32,11 @@ CAST_FILE_LOCAL = Path("characters.json")
 MANIFEST_FILE = Path("episode_manifest.json")
 
 def load_configs():
-    if CAST_FILE_DATASET.exists():
-        with open(CAST_FILE_DATASET, "r", encoding="utf-8") as f:
-            cast = json.load(f)
-    elif CAST_FILE_LOCAL.exists():
+    if CAST_FILE_LOCAL.exists():
         with open(CAST_FILE_LOCAL, "r", encoding="utf-8") as f:
+            cast = json.load(f)
+    elif CAST_FILE_DATASET.exists():
+        with open(CAST_FILE_DATASET, "r", encoding="utf-8") as f:
             cast = json.load(f)
     else:
         raise FileNotFoundError("Could not locate characters.json in dataset or working directory.")
@@ -47,9 +55,9 @@ def clear_vram():
         torch.cuda.empty_cache()
 
 def render_keyframes(cast: dict, manifest: dict):
-    print("=================================================================")
-    print("STAGE 1: Keyframe Generation (SDXL-Lightning 4-Step)")
-    print("=================================================================")
+    print("=================================================================", flush=True)
+    print("STAGE 1: Keyframe Generation (SDXL-Lightning 4-Step)", flush=True)
+    print("=================================================================", flush=True)
 
     pipe = StableDiffusionXLPipeline.from_pretrained(
         "stabilityai/stable-diffusion-xl-base-1.0",
@@ -57,13 +65,26 @@ def render_keyframes(cast: dict, manifest: dict):
         variant="fp16",
     ).to("cuda")
 
-    # Check if local dataset has lightning lora, else load from huggingface
-    local_lora = Path("/kaggle/input/cast-assets/sdxl_lightning_4step_lora.safetensors")
-    if local_lora.exists():
-        print(f"Loading SDXL-Lightning weights from dataset: {local_lora}")
-        pipe.load_lora_weights(str(local_lora.parent), weight_name=local_lora.name)
-    else:
-        print("Downloading SDXL-Lightning LoRA from Hugging Face...")
+    # Check local mounted dataset first
+    dataset_dirs = [
+        Path("/kaggle/input/sdxl-lightning-weights"),
+        Path("/kaggle/input/cast-assets"),
+    ]
+    loaded_lora = False
+    for d in dataset_dirs:
+        lora_candidates = list(d.glob("*.safetensors")) if d.exists() else []
+        if lora_candidates:
+            target_lora = lora_candidates[0]
+            print(f"Loading local SDXL-Lightning weights: {target_lora}", flush=True)
+            try:
+                pipe.load_lora_weights(str(target_lora.parent), weight_name=target_lora.name)
+                loaded_lora = True
+                break
+            except Exception as e:
+                print(f"Notice loading {target_lora}: {e}, falling back to Hugging Face...")
+
+    if not loaded_lora:
+        print("Downloading SDXL-Lightning LoRA from Hugging Face...", flush=True)
         pipe.load_lora_weights("ByteDance/SDXL-Lightning", weight_name="sdxl_lightning_4step_lora.safetensors")
 
     pipe.fuse_lora()
@@ -84,7 +105,7 @@ def render_keyframes(cast: dict, manifest: dict):
             f"{scene.get('emotion', 'expressive')} expression, sharp focus, cinema lighting"
         )
 
-        print(f"Generating Keyframe {idx:02d} for {char.get('display_name', char_id)}...")
+        print(f"Generating Keyframe {idx:02d} for {char.get('display_name', char_id)}...", flush=True)
         image = pipe(
             prompt=full_prompt,
             num_inference_steps=4,
@@ -95,15 +116,15 @@ def render_keyframes(cast: dict, manifest: dict):
 
         out_path = KEYFRAMES_DIR / f"scene_{idx:02d}.png"
         image.save(out_path)
-        print(f"-> Saved: {out_path}")
+        print(f"-> Saved: {out_path}", flush=True)
 
     del pipe
     clear_vram()
 
 def animate_clips(manifest: dict):
-    print("\n=================================================================")
-    print("STAGE 2: Keyframe Animation (LTX-Video I2V)")
-    print("=================================================================")
+    print("\n=================================================================", flush=True)
+    print("STAGE 2: Keyframe Animation (LTX-Video I2V)", flush=True)
+    print("=================================================================", flush=True)
 
     pipe = LTXImageToVideoPipeline.from_pretrained(
         "Lightricks/LTX-Video",
@@ -117,18 +138,17 @@ def animate_clips(manifest: dict):
         idx = scene["scene_number"]
         img_path = KEYFRAMES_DIR / f"scene_{idx:02d}.png"
         if not img_path.exists():
-            print(f"Skipping scene {idx:02d}, keyframe missing.")
+            print(f"Skipping scene {idx:02d}, keyframe missing.", flush=True)
             continue
 
         image = load_image(str(img_path))
-        # 24 fps (LTX requires frame count = 8k + 1)
         dur = scene.get("duration_sec", 4)
         num_frames = 97 if dur >= 4 else 73
 
-        print(f"Animating Scene {idx:02d} ({num_frames} frames)...")
+        print(f"Animating Scene {idx:02d} ({num_frames} frames)...", flush=True)
         video_frames = pipe(
             image=image,
-            prompt=scene.get("ltx_motion_prompt", "expressive head movement, talking mouth, comedic reaction"),
+            prompt=scene.get("ltx_motion_prompt", "expressive head movement, talking mouth, dramatic reaction"),
             negative_prompt="worst quality, blurry, jittery, morphing face, extra limbs, deformed",
             width=576,
             height=1024,
@@ -139,7 +159,7 @@ def animate_clips(manifest: dict):
 
         out_mp4 = CLIPS_DIR / f"scene_{idx:02d}.mp4"
         export_to_video(video_frames, str(out_mp4), fps=24)
-        print(f"-> Saved clip: {out_mp4}")
+        print(f"-> Saved clip: {out_mp4}", flush=True)
 
     del pipe
     clear_vram()
@@ -148,4 +168,4 @@ if __name__ == "__main__":
     cast, manifest = load_configs()
     render_keyframes(cast, manifest)
     animate_clips(manifest)
-    print("\nAll scenes rendered successfully! Outputs in /kaggle/working/clips/")
+    print("\nAll scenes rendered successfully! Outputs in /kaggle/working/clips/", flush=True)
