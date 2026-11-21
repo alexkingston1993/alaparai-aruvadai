@@ -4,11 +4,13 @@ import subprocess
 import sys
 from pathlib import Path
 import edge_tts
+from PIL import Image, ImageDraw, ImageFont
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MANIFESTS_DIR = BASE_DIR / "manifests"
 CHARACTERS_PATH = BASE_DIR / "config" / "characters.json"
 OUTPUT_ROOT = BASE_DIR / "rendered_clips"
+KEYFRAMES_DIR = BASE_DIR / "keyframes"
 SFX_DIR = BASE_DIR / "assets" / "sfx"
 BGM_PATH = BASE_DIR / "assets" / "bgm" / "comedy_loop.mp3"
 BUILD_DIR = BASE_DIR / "build"
@@ -25,13 +27,27 @@ VOICE_MAP = {
     "ta_IN_female_fiery": "ta-IN-PallaviNeural",
 }
 
+FONT_PATHS = [
+    "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+    "/System/Library/Fonts/Supplemental/Arial Black.ttf",
+    "/System/Library/Fonts/HelveticaNeue.ttc",
+    "/System/Library/Fonts/Helvetica.ttc",
+]
+
+def get_font(size: int):
+    for fp in FONT_PATHS:
+        if Path(fp).exists():
+            try:
+                return ImageFont.truetype(fp, size)
+            except Exception:
+                continue
+    return ImageFont.load_default()
 
 def run_cmd(cmd: list[str]):
     res = subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
     if res.returncode != 0:
         print(f"Command failed: {' '.join(cmd)}\nError: {res.stderr}")
         raise RuntimeError(res.stderr)
-
 
 def get_duration(file_path: Path) -> float:
     cmd = [
@@ -40,7 +56,6 @@ def get_duration(file_path: Path) -> float:
     ]
     res = subprocess.run(cmd, capture_output=True, text=True, check=True)
     return float(res.stdout.strip())
-
 
 async def generate_tts(text: str, voice_profile: dict, out_mp3: Path):
     voice = VOICE_MAP.get(voice_profile.get("tts_voice_id", ""), "ta-IN-ValluvarNeural")
@@ -52,51 +67,91 @@ async def generate_tts(text: str, voice_profile: dict, out_mp3: Path):
     communicate = edge_tts.Communicate(text=text, voice=voice, rate=rate, pitch=pitch)
     await communicate.save(str(out_mp3))
 
+def create_subtitle_overlay(text: str, out_png: Path, hook_text: str = None):
+    """Creates a transparent 1080x1920 PNG overlay with viral subtitles and hook banner."""
+    img = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
 
-def write_ass_subtitle(text: str, duration: float, out_ass: Path, hook_text: str = None):
-    """Generates viral yellow/white bold high-contrast subtitles for 9:16 vertical video.
-    Optionally overlays a top hook banner during the first 2.5 seconds.
-    """
-    h = int(duration // 3600)
-    m = int((duration % 3600) // 60)
-    s = duration % 60
-    end_ts = f"{h}:{m:02d}:{s:05.2f}"
-
-    hook_event = ""
+    # 1. Top Hook Banner (if present for scene 1)
     if hook_text:
-        hook_duration = min(duration, 2.5)
-        hook_end = f"0:00:{hook_duration:05.2f}"
-        hook_event = f"Dialogue: 1,0:00:00.00,{hook_end},HookBanner,,0,0,0,,{hook_text}\n"
+        hook_font = get_font(46)
+        hook_bbox = draw.textbbox((540, 240), hook_text, font=hook_font, anchor="mm")
+        pad_x, pad_y = 30, 16
+        pill_box = (
+            max(40, hook_bbox[0] - pad_x),
+            hook_bbox[1] - pad_y,
+            min(1040, hook_bbox[2] + pad_x),
+            hook_bbox[3] + pad_y
+        )
+        draw.rounded_rectangle(pill_box, radius=20, fill=(210, 20, 30, 235), outline=(255, 255, 255, 255), width=3)
+        draw.text((540, 240), hook_text, font=hook_font, fill=(255, 255, 255, 255), anchor="mm")
 
-    ass_content = f"""[Script Info]
-ScriptType: v4.00+
-PlayResX: 1080
-PlayResY: 1920
+    # 2. Viral Tanglish Subtitle (Yellow with thick black outline)
+    sub_font = get_font(56)
 
-[V4+ Styles]
-Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Viral,Arial Black,68,&H0000FFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,6,3,2,60,60,320,1
-Style: HookBanner,Arial Black,54,&H00FFFFFF,&H00FFFFFF,&H000000FF,&H80000000,-1,0,0,0,100,100,0,0,1,5,3,8,40,40,240,1
+    # Word wrap text if line is long
+    words = text.split()
+    lines = []
+    current_line = []
+    for w in words:
+        current_line.append(w)
+        test_line = " ".join(current_line)
+        bbox = draw.textbbox((0, 0), test_line, font=sub_font)
+        if (bbox[2] - bbox[0]) > 940:
+            current_line.pop()
+            lines.append(" ".join(current_line))
+            current_line = [w]
+    if current_line:
+        lines.append(" ".join(current_line))
 
-[Events]
-Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-{hook_event}Dialogue: 0,0:00:00.00,{end_ts},Viral,,0,0,0,,{text}
-"""
-    out_ass.write_text(ass_content, encoding="utf-8")
+    # Draw lines near bottom (y ~ 1450-1600)
+    start_y = 1500 - (len(lines) * 35)
+    for i, line in enumerate(lines):
+        y_pos = start_y + (i * 70)
+        # Thick stroke outline for viral readability
+        draw.text(
+            (540, y_pos),
+            line,
+            font=sub_font,
+            fill=(255, 235, 0, 255),
+            stroke_width=6,
+            stroke_fill=(0, 0, 0, 255),
+            anchor="mm"
+        )
 
+    img.save(out_png)
 
 def find_clip(ep_id: str, scene_num: int) -> Path:
     candidates = [
         OUTPUT_ROOT / ep_id / "clips" / f"scene_{scene_num:02d}.mp4",
         OUTPUT_ROOT / ep_id / f"scene_{scene_num:02d}.mp4",
         OUTPUT_ROOT / "clips" / f"scene_{scene_num:02d}.mp4",
-        BASE_DIR / "keyframes" / f"scene_{scene_num:02d}.mp4",
+        KEYFRAMES_DIR / f"scene_{scene_num:02d}.mp4",
     ]
     for c in candidates:
         if c.exists():
             return c
-    return candidates[0]
 
+    # Fallback: check if a rendered PNG keyframe was downloaded
+    img_candidates = [
+        OUTPUT_ROOT / ep_id / "keyframes" / f"scene_{scene_num:02d}.png",
+        OUTPUT_ROOT / ep_id / f"scene_{scene_num:02d}.png",
+        KEYFRAMES_DIR / f"scene_{scene_num:02d}.png",
+    ]
+    for img in img_candidates:
+        if img.exists():
+            out_clip = OUTPUT_ROOT / ep_id / "clips" / f"scene_{scene_num:02d}.mp4"
+            out_clip.parent.mkdir(parents=True, exist_ok=True)
+            cmd = [
+                "ffmpeg", "-y", "-loop", "1", "-i", str(img),
+                "-c:v", "libx264", "-t", "5", "-pix_fmt", "yuv420p",
+                "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920",
+                str(out_clip)
+            ]
+            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return out_clip
+
+    return candidates[0]
 
 async def assemble_episode(ep_id: str = "ep_001"):
     manifest_file = MANIFESTS_DIR / f"{ep_id}_manifest.json"
@@ -123,11 +178,11 @@ async def assemble_episode(ep_id: str = "ep_001"):
         raw_clip = find_clip(ep_id, idx)
 
         if not raw_clip.exists():
-            print(f"Warning: {raw_clip} not found. Skipping scene {idx:02d} until Kaggle clips are downloaded.")
+            print(f"Warning: {raw_clip} not found. Skipping scene {idx:02d}.")
             continue
 
         tts_mp3 = BUILD_DIR / f"{ep_id}_scene_{idx:02d}_tts.mp3"
-        ass_file = BUILD_DIR / f"{ep_id}_scene_{idx:02d}.ass"
+        overlay_png = BUILD_DIR / f"{ep_id}_scene_{idx:02d}_sub.png"
         scene_out = BUILD_DIR / f"{ep_id}_scene_{idx:02d}_final.mp4"
 
         # 1. Generate Voice
@@ -138,25 +193,26 @@ async def assemble_episode(ep_id: str = "ep_001"):
         video_dur = get_duration(raw_clip)
         pts_factor = audio_dur / max(video_dur, 0.1)
 
-        # 2. Subtitle (include hook banner for scene 1)
+        # 2. Render Subtitle & Hook Overlay PNG
         scene_hook = hook_text if idx == 1 else None
-        write_ass_subtitle(scene["dialogue"]["tanglish_subtitle"], audio_dur, ass_file, scene_hook)
+        create_subtitle_overlay(scene["dialogue"]["tanglish_subtitle"], overlay_png, scene_hook)
 
-        # 3. SFX and Assembly
+        # 3. Mix SFX and assemble via overlay filter
         sfx_cue = scene.get("sfx_cue", "")
         sfx_file = SFX_DIR / f"{sfx_cue}.mp3"
-        ass_escaped = str(ass_file).replace("\\", "/").replace(":", "\\:")
 
         if sfx_file.exists():
             cmd = [
                 "ffmpeg", "-y",
                 "-i", str(raw_clip),
+                "-i", str(overlay_png),
                 "-i", str(tts_mp3),
                 "-i", str(sfx_file),
                 "-filter_complex",
-                f"[0:v]setpts={pts_factor:.4f}*PTS,scale=1080:1920:flags=lanczos,ass='{ass_escaped}'[v];"
-                f"[1:a]apad=pad_dur=0.25[voice];"
-                f"[2:a]volume=0.55[sfx];"
+                f"[0:v]setpts={pts_factor:.4f}*PTS,scale=1080:1920:flags=lanczos[v0];"
+                f"[v0][1:v]overlay=0:0[v];"
+                f"[2:a]apad=pad_dur=0.25[voice];"
+                f"[3:a]volume=0.55[sfx];"
                 f"[voice][sfx]amix=inputs=2:duration=first[a]",
                 "-map", "[v]", "-map", "[a]",
                 "-c:v", "libx264", "-preset", "fast", "-crf", "20",
@@ -167,8 +223,12 @@ async def assemble_episode(ep_id: str = "ep_001"):
             cmd = [
                 "ffmpeg", "-y",
                 "-i", str(raw_clip),
+                "-i", str(overlay_png),
                 "-i", str(tts_mp3),
-                "-vf", f"setpts={pts_factor:.4f}*PTS,scale=1080:1920:flags=lanczos,ass='{ass_escaped}'",
+                "-filter_complex",
+                f"[0:v]setpts={pts_factor:.4f}*PTS,scale=1080:1920:flags=lanczos[v0];"
+                f"[v0][1:v]overlay=0:0[v]",
+                "-map", "[v]", "-map", "2:a",
                 "-c:v", "libx264", "-preset", "fast", "-crf", "20",
                 "-c:a", "aac", "-b:a", "192k", "-t", f"{audio_dur:.2f}",
                 str(scene_out)
@@ -176,10 +236,10 @@ async def assemble_episode(ep_id: str = "ep_001"):
 
         run_cmd(cmd)
         processed_scenes.append(scene_out)
-        print(f"Processed Scene {idx:02d} ({audio_dur:.2f}s)")
+        print(f"✓ Assembled Scene {idx:02d} ({audio_dur:.2f}s)")
 
     if not processed_scenes:
-        print(f"No scenes processed for {ep_id}. Ensure clips are downloaded into {OUTPUT_ROOT / ep_id}")
+        print(f"No scenes processed for {ep_id}. Check outputs.")
         return
 
     # 4. Concatenate
@@ -213,7 +273,6 @@ async def assemble_episode(ep_id: str = "ep_001"):
     print(f"🎉 Episode assembly complete! Video saved to:")
     print(f"{final_mp4}")
     print(f"=======================================================\n")
-
 
 if __name__ == "__main__":
     ep = sys.argv[1] if len(sys.argv) > 1 else "ep_001"
