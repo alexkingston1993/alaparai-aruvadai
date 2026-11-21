@@ -1,0 +1,27 @@
+# Environment & Keys
+.env
+*.env
+kaggle.json
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Build artifacts & temporary renders
+build/
+output/*.mp4
+rendered_clips/
+keyframes/
+clips/
+*.ass
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride

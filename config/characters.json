@@ -1,0 +1,92 @@
+{
+  "style_prefix": "Viral 3D anthropomorphic character animation, Pixar and Unreal Engine 5 style, hyper-realistic food and object textures with expressive human-like cartoon eyes, eyebrows, mouth, and tiny stylized arms and legs, vibrant South Indian street lighting, 9:16 vertical framing",
+  "characters": {
+    "vayithaali_varkee": {
+      "display_name": "Vayithaali Varkee",
+      "object_type": "Ooty Varkey Biscuit",
+      "catchphrase": "Ayyo enakku varkee nodungudhey!",
+      "reference_images": [
+        "/kaggle/input/cast-assets/varkee_front.png",
+        "/kaggle/input/cast-assets/varkee_panicked.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic crispy golden-brown flaky square Ooty Varkey puff biscuit with a hyper-realistic baked pastry texture, wide anxious cartoon eyes, thin pencil moustache, expressive talking mouth, tiny cartoon arms and legs, small pastry crumbs floating around",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_fast_high",
+        "pitch": "+12Hz",
+        "speed": "1.15"
+      }
+    },
+    "maama_vayiru": {
+      "display_name": "Maama Vayiru",
+      "object_type": "Watermelon",
+      "catchphrase": "En vayithula puzhiya karaikaadheenga da!",
+      "reference_images": [
+        "/kaggle/input/cast-assets/maama_front.png",
+        "/kaggle/input/cast-assets/maama_angry.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic giant round pot-bellied dark green striped watermelon with a hyper-realistic glossy rind texture, thick bushy black handlebar moustache, heavy expressive eyebrows, lazy cheerful eyes, tiny white lungi wrapped around the bottom, tiny cartoon arms and legs",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_deep_warm",
+        "pitch": "-10Hz",
+        "speed": "0.95"
+      }
+    },
+    "rangeela_ramasaami": {
+      "display_name": "Rangeela Ramasaami",
+      "object_type": "Pineapple",
+      "catchphrase": "Mullu irukkuravan dhanda massu!",
+      "reference_images": [
+        "/kaggle/input/cast-assets/ramasaami_front.png",
+        "/kaggle/input/cast-assets/ramasaami_smirk.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic flashy golden-yellow pineapple with a hyper-realistic textured skin, spiky green pineapple leaves styled like a dramatic slicked-back hair puff, wearing oversized retro neon tinted sunglasses, cocky smirking mouth, tiny gold chain, tiny cartoon arms and legs",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_dramatic",
+        "pitch": "+2Hz",
+        "speed": "1.05"
+      }
+    },
+    "mottai_murungakkai": {
+      "display_name": "Mottai Murungakkai",
+      "object_type": "Drumstick",
+      "catchphrase": "Ozhunga iru, illana odachi potruven!",
+      "reference_images": [
+        "/kaggle/input/cast-assets/murungakkai_front.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic tall skinny green ribbed drumstick vegetable acting like an angry lecturing uncle, furrowed eyebrows, open shouting mouth, wobbling wildly, tiny cartoon arms and legs",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_fast_high",
+        "pitch": "+8Hz",
+        "speed": "1.20"
+      }
+    },
+    "pattasu_pacha_milagai": {
+      "display_name": "Pattasu Pacha Milagai",
+      "object_type": "Green Chili",
+      "catchphrase": "Naan pathavecha koluthi poduven!",
+      "reference_images": [
+        "/kaggle/input/cast-assets/milagai_front.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic fiery sharp slender bright green chili pepper with tiny puffs of cartoon smoke rising from its top green stem, raging fiery eyes, wide roasting mouth, aggressive stance, tiny cartoon arms and legs",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_female_fiery",
+        "pitch": "+15Hz",
+        "speed": "1.25"
+      }
+    },
+    "thimiru_thengai": {
+      "display_name": "Thimiru Thengai",
+      "object_type": "Coconut",
+      "catchphrase": "En mandaiya udaikka mudiyuma unnala?",
+      "reference_images": [
+        "/kaggle/input/cast-assets/thengai_front.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic stubborn hairy fibrous brown coconut shell with tiny surface hairline crack, defiant squinting eyes, stubborn frown, folded tiny wooden arms, tiny cartoon legs",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_deep_warm",
+        "pitch": "-15Hz",
+        "speed": "0.90"
+      }
+    }
+  }
+}

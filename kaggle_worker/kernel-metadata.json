@@ -1,0 +1,16 @@
+{
+  "id": "YOUR_KAGGLE_USERNAME/tamil-ai-webseries-worker",
+  "title": "Tamil AI Webseries Worker",
+  "code_file": "render_episode.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "YOUR_KAGGLE_USERNAME/cast-assets"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}
