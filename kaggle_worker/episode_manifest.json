@@ -1,0 +1,116 @@
+{
+  "episode_id": "ep_001",
+  "title_tamil": "வெள்ளை புலி வேந்தன் - பகுதி 1: அவமானம்!",
+  "title_tanglish": "Vellai Puli Vendhan - Part 1: Avamaanam!",
+  "seo_metadata": {
+    "hook_text": "கூலி வேலை பார்த்த வெள்ளை புலியை அவமானப்படுத்திய மனைவி! 😢🔥",
+    "caption": "Vellai Puli Vendhan worked day and night for his family, only to be humiliated in public by Soppana Sundari and Vengai Mavan... Wait for Part 2! 🔥👇",
+    "hashtags": [
+      "#VellaiPuliVendhan",
+      "#TamilAIStory",
+      "#TamilShorts",
+      "#TamilReels",
+      "#EmotionalStoryTamil",
+      "#AIAnimationTamil",
+      "#KarmaStory"
+    ]
+  },
+  "scenes": [
+    {
+      "scene_number": 1,
+      "duration_sec": 5,
+      "character_id": "vellai_puli_vendhan_poor",
+      "camera_shot": "medium close-up",
+      "emotion": "warm hopeful",
+      "sdxl_scene_prompt": "inside a modest dim-lit Tamil village home at dusk, happily counting crumpled rupee notes and coins in a small tin box on a wooden table",
+      "ltx_motion_prompt": "He gently places coins into the tin box, looks up with a proud warm smile while speaking, soft warm lamp light flickering, slow gentle camera push-in",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Soppana Sundari",
+        "tamil_text": "இந்த சில்லறை காசெல்லாம் சேர்த்து வச்சிருக்கேன்... சீக்கிரமே சொந்தமா ஒரு கடை போட்டு உங்களை ராணி மாதிரி பாத்துக்குவேன்!",
+        "tanglish_subtitle": "Indha chillarai kaasellam serthu vachirukken... seekirame sondhama kadai pottu ungala rani maadhiri paathukuven!"
+      },
+      "sfx_cue": "soft_emotional_flute"
+    },
+    {
+      "scene_number": 2,
+      "duration_sec": 5,
+      "character_id": "soppana_sundari",
+      "camera_shot": "medium shot",
+      "emotion": "pure disgust and arrogance",
+      "sdxl_scene_prompt": "standing on a crowded South Indian village street in bright daylight with villagers blurred in background, holding a packed suitcase, glaring with pure disgust and arrogance",
+      "ltx_motion_prompt": "She scoffs loudly, waves her hand dismissively in anger, flips her saree pallu dramatically while shouting, sharp handheld camera shake",
+      "dialogue": {
+        "speaker": "Soppana Sundari",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "போதும் உன் ஓட்ட சைக்கிள் வாழ்க்கை! கூலி வேலை பாக்குற உன்கூட என்னால் வாழ முடியாது. எனக்கு பணம் வேணும்!",
+        "tanglish_subtitle": "Podhum un otta cycle vaazhkai! Kooli vela paakura unkooda ennal vaazha mudiyadhu. Enakku panam venum!"
+      },
+      "sfx_cue": "record_scratch"
+    },
+    {
+      "scene_number": 3,
+      "duration_sec": 5,
+      "character_id": "vengai_mavan",
+      "camera_shot": "low-angle heroic-villain shot",
+      "emotion": "cruel mocking smirk",
+      "sdxl_scene_prompt": "leaning arrogantly against a shiny red luxury sports car on a dusty village street, tossing a bundle of cash in one hand",
+      "ltx_motion_prompt": "He lowers his aviator sunglasses slightly, laughs cruelly, and flicks his hand dismissively toward the camera while speaking, slow arrogant camera tilt-up",
+      "dialogue": {
+        "speaker": "Vengai Mavan",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "டேய் வெள்ளை புலி, உன் தகுதிக்கு இவளெல்லாம் கனவுல கூட கிடைக்க மாட்டா. ஒழுங்கா ஓரமா போடா!",
+        "tanglish_subtitle": "Dei Vellai Puli, un thagudhiku ivallam kanavula kooda kidaikka maatta. Ozhunga orama poda!"
+      },
+      "sfx_cue": "villain_bass_drop"
+    },
+    {
+      "scene_number": 4,
+      "duration_sec": 4,
+      "character_id": "super_subbaiah",
+      "camera_shot": "heartbreaking close-up",
+      "emotion": "crying desperate",
+      "sdxl_scene_prompt": "standing barefoot on a dusty village road, tears streaming down his furry cheeks, reaching out both tiny paws pleadingly toward the street",
+      "ltx_motion_prompt": "Big glistening tears roll down his face, his lower lip trembles as he reaches forward crying desperately, slow emotional zoom-in",
+      "dialogue": {
+        "speaker": "Super Subbaiah",
+        "listener": "Soppana Sundari",
+        "tamil_text": "அம்மா, எங்களை விட்டு போகாதீங்கம்மா! அப்பா ரொம்ப பாவம்மா!",
+        "tanglish_subtitle": "Amma, engala vittu pogadheengamma! Appa romba paavamma!"
+      },
+      "sfx_cue": "sad_violin"
+    },
+    {
+      "scene_number": 5,
+      "duration_sec": 4,
+      "character_id": "sandai_saroja",
+      "camera_shot": "tight medium close-up",
+      "emotion": "determined protective glare",
+      "sdxl_scene_prompt": "standing fiercely on the dusty road with fists clenched, wiping away a tear with one arm",
+      "ltx_motion_prompt": "She wipes her eye quickly, raises her chin with fiery determination, and speaks boldly with energetic hand gestures, steady dramatic focus",
+      "dialogue": {
+        "speaker": "Sandai Saroja",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "தம்பி அழாதடா! அப்பா, நீங்க கவலைப்படாதீங்க, நான் உங்க கூட இருக்கேன்!",
+        "tanglish_subtitle": "Thambi azhadhada! Appa, neenga kavalaipadadheenga, naan unga kooda irukken!"
+      },
+      "sfx_cue": "dramatic_swoosh"
+    },
+    {
+      "scene_number": 6,
+      "duration_sec": 5,
+      "character_id": "vellai_puli_vendhan_poor",
+      "camera_shot": "tight close-up",
+      "emotion": "fierce burning determination",
+      "sdxl_scene_prompt": "standing alone on the dusty village road as a red sports car speeds away in a cloud of dust behind him, mud splashed on his shirt, dramatic sunset backlighting",
+      "ltx_motion_prompt": "Dust swirls around him, he slowly clenches his paw into a tight fist, wipes mud off his cheek, and stares straight into the camera with intense fiery resolve, dramatic rapid zoom-in",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Audience",
+        "tamil_text": "இன்னைக்கு என்னை பார்த்து சிரிச்ச அதே ஊரு... ஒரு நாள் என்னை பார்த்து அண்ணாந்து பார்க்கும்!",
+        "tanglish_subtitle": "Innaiku ennai paarthu siricha adhe ooru... oru naal ennai paarthu annaandhu paarkum!"
+      },
+      "sfx_cue": "thunder_clap"
+    }
+  ]
+}

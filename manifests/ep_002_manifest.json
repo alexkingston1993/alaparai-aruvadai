@@ -1,0 +1,115 @@
+{
+  "episode_id": "ep_002",
+  "title_tamil": "வெள்ளை புலி வேந்தன் - பகுதி 2: உழைப்பு & தங்க தாமரை!",
+  "title_tanglish": "Vellai Puli Vendhan - Part 2: Ulaippu & Thanga Thamarai!",
+  "seo_metadata": {
+    "hook_text": "கஷ்டத்துல கை கொடுத்த தங்க தாமரை... வேந்தனின் முதல் வெற்றி! 💪❤️",
+    "caption": "With Thanga Thamarai caring for Super Subbaiah and Sandai Saroja, Vendhan's relentless hustle pays off! 🚀 Part 3 coming next!",
+    "hashtags": [
+      "#VellaiPuliVendhan",
+      "#ThangaThamarai",
+      "#TamilAIStory",
+      "#TamilShorts",
+      "#TamilReels",
+      "#MotivationTamil"
+    ]
+  },
+  "scenes": [
+    {
+      "scene_number": 1,
+      "duration_sec": 4,
+      "character_id": "vellai_puli_vendhan_poor",
+      "camera_shot": "cinematic side shot",
+      "emotion": "gritty determination",
+      "sdxl_scene_prompt": "at a busy South Indian wholesale grain warehouse at night under harsh yellow hanging bulbs, carrying heavy burlap rice sacks on his back, glistening sweat on his white fur",
+      "ltx_motion_prompt": "He shifts the heavy sack on his shoulder, exhales deeply with gritty determination, and marches forward steadily, cinematic tracking shot",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Self",
+        "tamil_text": "பகல் இரவு பார்க்காம உழைக்கணும்... என் பிள்ளைங்க வாழ்க்கை மாறணும்!",
+        "tanglish_subtitle": "Pagal iravu paarkama uzhaikkanum... en pillainga vaazhkai maaranum!"
+      },
+      "sfx_cue": "heavy_work_thud"
+    },
+    {
+      "scene_number": 2,
+      "duration_sec": 5,
+      "character_id": "thanga_thamarai",
+      "camera_shot": "medium close-up",
+      "emotion": "gentle kindness and warmth",
+      "sdxl_scene_prompt": "standing at the doorway of a clean traditional Tamil home in warm morning sunlight, holding two steel tiffin lunchboxes",
+      "ltx_motion_prompt": "She smiles warmly, holds out the tiffin boxes gently, and nods reassuringly while speaking, soft golden sunlight rays in background",
+      "dialogue": {
+        "speaker": "Thanga Thamarai",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "கவலைப்படாதீங்க வேந்தன். நீங்க தைரியமா வேலைக்கு போங்க, குழந்தைகளை நான் என் உயிரா பாத்துக்குறேன்.",
+        "tanglish_subtitle": "Kavalaipadadheenga Vendhan. Neenga dhairiyama velaiku ponga, kuzhandhaigala naan en uyira paathukuren."
+      },
+      "sfx_cue": "warm_chime"
+    },
+    {
+      "scene_number": 3,
+      "duration_sec": 4,
+      "character_id": "super_subbaiah",
+      "camera_shot": "cheerful medium shot",
+      "emotion": "excited joyful",
+      "sdxl_scene_prompt": "sitting happily at a small wooden table wearing a neat white and blue school uniform with a backpack nearby, smiling brightly with a plate of crispy dosa",
+      "ltx_motion_prompt": "He bounces excitedly on his seat, gives a big enthusiastic thumbs-up with his tiny paw while grinning widely, bright warm camera bounce",
+      "dialogue": {
+        "speaker": "Super Subbaiah",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "அத்தை செஞ்ச தோசை செம்ம டேஸ்ட் அப்பா! நீங்க சீக்கிரம் பெரிய ஆளா வருவீங்க!",
+        "tanglish_subtitle": "Athai senja dosai semma taste appa! Neenga seekiram periya aala varuveenga!"
+      },
+      "sfx_cue": "happy_sparkle"
+    },
+    {
+      "scene_number": 4,
+      "duration_sec": 5,
+      "character_id": "vellai_puli_vendhan_poor",
+      "camera_shot": "medium close-up",
+      "emotion": "triumphant grateful",
+      "sdxl_scene_prompt": "standing inside a tidy modern warehouse office wearing a clean pressed light-blue button-up shirt, holding an official promotion letter and bonus envelope, eyes shining with emotion",
+      "ltx_motion_prompt": "He looks down at the letter in disbelief, breaks into a triumphant grateful smile, and holds the letter close to his chest while speaking, slow upward camera pan",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Audience",
+        "tamil_text": "என் நேர்மைய பார்த்து முதலாளி மேனேஜர் பதவியும், சம்பள உயர்வும் கொடுத்துட்டாரு! இது தான் முதல் படி!",
+        "tanglish_subtitle": "En nermaiya paarthu mudhalali manager padhaviyum, sambala uyarvum koduthuttaaru! Idhu dhaan mudhal padi!"
+      },
+      "sfx_cue": "inspiring_swell"
+    },
+    {
+      "scene_number": 5,
+      "duration_sec": 4,
+      "character_id": "sandai_saroja",
+      "camera_shot": "medium shot",
+      "emotion": "wide-eyed joy and pride",
+      "sdxl_scene_prompt": "standing outside the grand iron gates of a prestigious modern Indian international school in crisp new school uniform with tie and backpack",
+      "ltx_motion_prompt": "She spins around joyfully showing off her new uniform and claps her paws together excitedly while speaking, bright sunlit lens flare",
+      "dialogue": {
+        "speaker": "Sandai Saroja",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "வாவ் அப்பா! நம்மளும் பெரிய இங்கிலீஷ் ஸ்கூல்ல படிக்கப் போறோமா?",
+        "tanglish_subtitle": "Wow appa! Nammalum periya English school-la padikka poroma?"
+      },
+      "sfx_cue": "bell_ring"
+    },
+    {
+      "scene_number": 6,
+      "duration_sec": 5,
+      "character_id": "vellai_puli_vendhan_poor",
+      "camera_shot": "cinematic low-angle shot",
+      "emotion": "unstoppable ambition",
+      "sdxl_scene_prompt": "standing proudly in front of a newly opened small commercial office with a fresh Tamil and English signboard reading 'VENDHAN ENTERPRISES' decorated with marigold garlands, cutting a red ribbon with scissors",
+      "ltx_motion_prompt": "He snips the red ribbon cleanly, looks straight into the lens with unstoppable ambition as marigold petals fall gently around him, epic slow-motion push-in",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Audience",
+        "tamil_text": "இன்னையோட கூலி வேலை முடிஞ்சுது... 'வேந்தன் எண்டர்பிரைசஸ்' ஆரம்பம்!",
+        "tanglish_subtitle": "Innaiyoda kooli vela mudinjidhu... 'Vendhan Enterprises' aarambam!"
+      },
+      "sfx_cue": "mass_bgm_entry"
+    }
+  ]
+}

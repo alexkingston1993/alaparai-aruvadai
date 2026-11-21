@@ -1,0 +1,115 @@
+{
+  "episode_id": "ep_003",
+  "title_tamil": "வெள்ளை புலி வேந்தன் - பகுதி 3: கோடீஸ்வரன்!",
+  "title_tanglish": "Vellai Puli Vendhan - Part 3: Kodeeswaran!",
+  "seo_metadata": {
+    "hook_text": "வேங்கை மாவன் கம்பெனியை ஏலத்துல எடுத்த வெள்ளை புலி! 😎🔥",
+    "caption": "5 years later... Vendhan buys out Vengai Mavan's bankrupt empire, and Soppana Sundari realizes her biggest mistake! 😱 Part 4 finale next!",
+    "hashtags": [
+      "#VellaiPuliVendhan",
+      "#Kodeeswaran",
+      "#TamilAIStory",
+      "#TamilShorts",
+      "#TamilReels",
+      "#GlowUpTamil"
+    ]
+  },
+  "scenes": [
+    {
+      "scene_number": 1,
+      "duration_sec": 5,
+      "character_id": "vellai_puli_vendhan_rich",
+      "camera_shot": "medium shot",
+      "emotion": "calm powerful confidence",
+      "sdxl_scene_prompt": "standing beside floor-to-ceiling glass windows inside a sleek luxury Chennai skyscraper CEO office overlooking the city skyline at golden hour, hands in pockets, regal billionaire posture",
+      "ltx_motion_prompt": "He adjusts his gold cufflinks smoothly, turns his head confidently toward the camera with a calm powerful expression, smooth cinematic orbit",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Audience",
+        "tamil_text": "அஞ்சு வருஷம்... வெறும் உழைப்பு, நம்பிக்கை. இன்னைக்கு ஊரே திரும்பி பாக்குற மாதிரி வளர்ந்துட்டோம்!",
+        "tanglish_subtitle": "Anju varusham... verum uzhaippu, nambikkai. Innaiku oore thirumbi paakura maadhiri valarndhuttom!"
+      },
+      "sfx_cue": "luxury_whoosh"
+    },
+    {
+      "scene_number": 2,
+      "duration_sec": 5,
+      "character_id": "vengai_mavan",
+      "camera_shot": "tight close-up",
+      "emotion": "panicking terrified",
+      "sdxl_scene_prompt": "sitting inside a messy dim-lit office surrounded by red 'BANKRUPT' legal notices and crumpled papers, disheveled jacket, sweating and panicking with wide terrified amber eyes",
+      "ltx_motion_prompt": "He slams the legal paper onto the desk in shock, grabs his head with both paws trembling in disbelief, erratic handheld zoom-in",
+      "dialogue": {
+        "speaker": "Vengai Mavan",
+        "listener": "Self",
+        "tamil_text": "என்னது? என் கம்பெனியை ஏலத்துல எடுத்தது அந்த கூலி வேலை பார்த்த வெள்ளை புலியா? வாய்ப்பே இல்ல!",
+        "tanglish_subtitle": "Ennadhu? En company-ya elathula eduthadhu andha kooli vela paartha Vellai Puliya? Vaaipe illa!"
+      },
+      "sfx_cue": "tension_sting"
+    },
+    {
+      "scene_number": 3,
+      "duration_sec": 5,
+      "character_id": "vellai_puli_vendhan_rich",
+      "camera_shot": "heroic low-angle shot",
+      "emotion": "cold composed smirk",
+      "sdxl_scene_prompt": "stepping out of a sleek matte-black luxury SUV in front of a grand glass corporate tower with security guards and flashing camera lights behind him, wearing dark designer sunglasses",
+      "ltx_motion_prompt": "He steps out with commanding slow-motion swagger, takes off his sunglasses smoothly, and delivers his line with a cold composed smirk, epic low-angle dolly-in",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Vengai Mavan",
+        "tamil_text": "காலம் எல்லாத்துக்கும் பதில் சொல்லும்னு சொன்னேனே... இப்போ இந்த கம்பெனி என் பெயர்ல இருக்கு!",
+        "tanglish_subtitle": "Kaalam ellathukkum badhil sollumnu sonnene... ippo indha company en peyarla irukku!"
+      },
+      "sfx_cue": "mass_car_door_slam"
+    },
+    {
+      "scene_number": 4,
+      "duration_sec": 5,
+      "character_id": "soppana_sundari",
+      "camera_shot": "medium close-up",
+      "emotion": "jaw-dropped shock and regret",
+      "sdxl_scene_prompt": "standing on the sidewalk outside the corporate tower wearing a slightly faded dull saree and less jewelry, staring in absolute jaw-dropped shock and regret",
+      "ltx_motion_prompt": "Her jaw drops open, she raises both paws to her cheeks in sheer panic and regret, eyes darting nervously, dramatic snap-zoom onto her face",
+      "dialogue": {
+        "speaker": "Soppana Sundari",
+        "listener": "Self",
+        "tamil_text": "அய்யோ... இது நம்ம வேந்தனா?! கோடீஸ்வரனா மாறிட்டாரே! நான் எவ்ளோ பெரிய தப்பு பண்ணிட்டேன்!",
+        "tanglish_subtitle": "Ayyo... idhu namma Vendhana?! Kodeeswarana maarittare! Naan evlo periya thappu pannitten!"
+      },
+      "sfx_cue": "vine_boom"
+    },
+    {
+      "scene_number": 5,
+      "duration_sec": 4,
+      "character_id": "vengai_mavan",
+      "camera_shot": "medium shot",
+      "emotion": "angry bitter scowl",
+      "sdxl_scene_prompt": "standing outside a locked office gate with a cardboard box of personal belongings, pointing harshly away, dramatic overcast lighting",
+      "ltx_motion_prompt": "He scowls bitterly, shoves his hand forward dismissively while yelling, and storms away out of frame, gritty handheld motion",
+      "dialogue": {
+        "speaker": "Vengai Mavan",
+        "listener": "Soppana Sundari",
+        "tamil_text": "எல்லாம் போச்சு... என் கையில இனி ஒரு பைசா கூட இல்ல. நீயும் உன் வழிய பாத்துட்டு போ!",
+        "tanglish_subtitle": "Ellam pochu... en kaiyila ini oru paisa kooda illa. Neeyum un vazhiya paathuttu po!"
+      },
+      "sfx_cue": "slap_echo"
+    },
+    {
+      "scene_number": 6,
+      "duration_sec": 4,
+      "character_id": "soppana_sundari",
+      "camera_shot": "tight close-up",
+      "emotion": "pleading manipulative",
+      "sdxl_scene_prompt": "standing outside the massive ornate gates of Vendhan's luxury mansion at sunset, forcing fake tears and a pleading manipulative expression",
+      "ltx_motion_prompt": "She wipes a tear calculatingly, composes a desperate pleading face, and walks briskly toward the mansion gates, suspenseful slow push-in",
+      "dialogue": {
+        "speaker": "Soppana Sundari",
+        "listener": "Self",
+        "tamil_text": "வேந்தன் ரொம்ப நல்லவரு... நான் போய் மன்னிப்பு கேட்டா கண்டிப்பா என்னை ஏத்துப்பாரு!",
+        "tanglish_subtitle": "Vendhan romba nallavaru... naan poi mannippu ketta kandippa ennai yethuppaaru!"
+      },
+      "sfx_cue": "dramatic_cliffhanger"
+    }
+  ]
+}

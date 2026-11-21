@@ -1,0 +1,115 @@
+{
+  "episode_id": "ep_004",
+  "title_tamil": "வெள்ளை புலி வேந்தன் - பகுதி 4: கர்மா & கல்யாணம்! (Finale)",
+  "title_tanglish": "Vellai Puli Vendhan - Part 4: Karma & Kalyanam! (Finale)",
+  "seo_metadata": {
+    "hook_text": "மன்னிப்பு கேட்ட மனைவிக்கு வேந்தன் கொடுத்த சம்மட்டி அடி! 🔥❤️",
+    "caption": "Vendhan teaches Soppana Sundari what truly matters in life and marries the real gem who stood by him! ❤️👇 Comment your thoughts!",
+    "hashtags": [
+      "#VellaiPuliVendhan",
+      "#KarmaStory",
+      "#TamilAIStory",
+      "#TamilShorts",
+      "#TamilReels",
+      "#HappyEnding"
+    ]
+  },
+  "scenes": [
+    {
+      "scene_number": 1,
+      "duration_sec": 5,
+      "character_id": "soppana_sundari",
+      "camera_shot": "medium shot",
+      "emotion": "desperate crying",
+      "sdxl_scene_prompt": "standing in the grand marble courtyard of Vendhan's luxury villa with paws folded together in desperate begging pose, crying heavily with mascara smudged",
+      "ltx_motion_prompt": "She folds her paws tightly, sobs dramatically, and steps forward pleadingly with trembling shoulders, dramatic slow zoom",
+      "dialogue": {
+        "speaker": "Soppana Sundari",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "என்னை மன்னிச்சிடுங்க வேந்தன்! நான் தெரியாம தப்பு பண்ணிட்டேன்... என்னை மறுபடியும் சேர்த்துக்கோங்க!",
+        "tanglish_subtitle": "Ennai mannichidunga Vendhan! Naan theriyama thappu pannitten... ennai marubadiyum serthukonga!"
+      },
+      "sfx_cue": "sad_violin"
+    },
+    {
+      "scene_number": 2,
+      "duration_sec": 5,
+      "character_id": "vellai_puli_vendhan_rich",
+      "camera_shot": "heroic low-angle close-up",
+      "emotion": "stern unshakeable authority",
+      "sdxl_scene_prompt": "standing tall at the top of grand marble villa stairs in his royal navy suit, holding up one firm open palm in a commanding stop gesture",
+      "ltx_motion_prompt": "He raises his paw firmly to halt her, shakes his head once with absolute authority, and speaks with piercing calm intensity, steady powerful push-in",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Soppana Sundari",
+        "tamil_text": "நில்லு சுந்தரி! பணம் இல்லாதப்போ என்னை விட்டு போனவ, பணம் வந்ததும் திரும்ப வரக்கூடாது. முடியாது!",
+        "tanglish_subtitle": "Nillu Sundari! Panam illadhappo ennai vittu ponava, panam vandhadhum thirumba varakoodadhu. Mudiyaadhu!"
+      },
+      "sfx_cue": "deep_bass_hit"
+    },
+    {
+      "scene_number": 3,
+      "duration_sec": 5,
+      "character_id": "vellai_puli_vendhan_rich",
+      "camera_shot": "medium close-up",
+      "emotion": "proud emotional smile",
+      "sdxl_scene_prompt": "standing warmly in the sunlit villa courtyard, gesturing gracefully toward the side with a proud emotional smile, golden hour lighting",
+      "ltx_motion_prompt": "His stern face softens into a deep grateful smile as he turns gracefully and extends his paw welcomingly, warm cinematic glow",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Soppana Sundari",
+        "tamil_text": "வாழ்க்கையில அழகும் பணமும் முக்கியம் இல்ல... கஷ்டத்துல கூட நிக்கிற விசுவாசமும் நல்ல மனசும் தான் பெருசு!",
+        "tanglish_subtitle": "Vaazhkaiyila azhagum panamum mukkiyam illa... kashtathula kooda nikkira visuvaasamum nalla manasum dhaan perusu!"
+      },
+      "sfx_cue": "inspiring_flute_swell"
+    },
+    {
+      "scene_number": 4,
+      "duration_sec": 5,
+      "character_id": "thanga_thamarai",
+      "camera_shot": "medium shot",
+      "emotion": "radiant humble smile",
+      "sdxl_scene_prompt": "walking gracefully into the sunlit marble courtyard wearing an elegant golden-peach Kanchipuram silk saree with fresh jasmine flowers in her hair, soft dreamy bokeh background",
+      "ltx_motion_prompt": "She walks forward gracefully with a gentle radiant smile, blinks warmly, and speaks with heartfelt sincerity as soft petals drift in the breeze, smooth slow-motion push-in",
+      "dialogue": {
+        "speaker": "Thanga Thamarai",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "நீங்க கஷ்டப்பட்டப்போ உங்களுக்காகவும் குழந்தைகளுக்காகவும் நின்னது என் கடமை வேந்தன்!",
+        "tanglish_subtitle": "Neenga kashtappattappo ungalukkaagavum kuzhandhaigalukkaagavum ninnadhu en kadamai Vendhan!"
+      },
+      "sfx_cue": "warm_chime"
+    },
+    {
+      "scene_number": 5,
+      "duration_sec": 4,
+      "character_id": "sandai_saroja",
+      "camera_shot": "cheerful medium close-up",
+      "emotion": "joyful sparkling eyes",
+      "sdxl_scene_prompt": "wearing festive silk pattu pavadai in the flower-decorated courtyard, smiling joyfully with eyes sparkling and pointing happily",
+      "ltx_motion_prompt": "She jumps up excitedly with a huge beaming smile, clapping her tiny paws together joyfully while speaking, lively warm camera motion",
+      "dialogue": {
+        "speaker": "Sandai Saroja",
+        "listener": "Vellai Puli Vendhan",
+        "tamil_text": "அப்பா, இவங்க தான் எங்களுக்கு உண்மையான அம்மா! இவங்களையே கல்யாணம் பண்ணிக்கோங்க!",
+        "tanglish_subtitle": "Appa, ivanga dhaan engalukku unmaiyana amma! Ivangalaiye kalyanam pannikonga!"
+      },
+      "sfx_cue": "happy_sparkle"
+    },
+    {
+      "scene_number": 6,
+      "duration_sec": 6,
+      "character_id": "vellai_puli_vendhan_rich",
+      "camera_shot": "celebratory wide-medium shot",
+      "emotion": "warm joyful gratitude",
+      "sdxl_scene_prompt": "traditional South Indian temple wedding mandapam glowing with marigold flowers and brass oil lamps, Vellai Puli Vendhan in a cream silk veshti and shirt wearing a jasmine garland beside Thanga Thamarai in bridal silk saree, both smiling warmly toward the camera with petals falling",
+      "ltx_motion_prompt": "Shower of rose and jasmine petals falls in slow motion as Vendhan smiles warmly and folds his paws in a traditional Vanakkam gesture toward the audience, festive golden camera pull-back",
+      "dialogue": {
+        "speaker": "Vellai Puli Vendhan",
+        "listener": "Audience",
+        "tamil_text": "நல்ல மனசுக்கு என்னைக்கும் நல்லதே நடக்கும்! எங்க புது வாழ்க்கையை ஆசீர்வாதம் பண்ணுங்க!",
+        "tanglish_subtitle": "Nalla manasukku ennaikkum nalladhe nadakkum! Enga pudhu vaazhkaiyai aaseervaadham pannunga!"
+      },
+      "sfx_cue": "nadhaswaram_celebration"
+    }
+  ]
+}

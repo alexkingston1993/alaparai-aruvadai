@@ -1,91 +1,95 @@
 {
-  "style_prefix": "Viral 3D anthropomorphic character animation, Pixar and Unreal Engine 5 style, hyper-realistic food and object textures with expressive human-like cartoon eyes, eyebrows, mouth, and tiny stylized arms and legs, vibrant South Indian street lighting, 9:16 vertical framing",
+  "style_prefix": "Viral 3D anthropomorphic animal animation, Pixar and Unreal Engine 5 cinematic style, hyper-realistic fur textures with expressive human-like cartoon eyes and mouth, dramatic South Indian lighting, 9:16 vertical framing",
   "characters": {
-    "vayithaali_varkee": {
-      "display_name": "Vayithaali Varkee",
-      "object_type": "Ooty Varkey Biscuit",
-      "catchphrase": "Ayyo enakku varkee nodungudhey!",
+    "vellai_puli_vendhan_poor": {
+      "display_name": "Vellai Puli Vendhan",
+      "species": "White Tiger (Daily Worker)",
       "reference_images": [
-        "/kaggle/input/cast-assets/varkee_front.png",
-        "/kaggle/input/cast-assets/varkee_panicked.png"
+        "/kaggle/input/cast-assets/vendhan_poor.png"
       ],
-      "sdxl_base_prompt": "anthropomorphic crispy golden-brown flaky square Ooty Varkey puff biscuit with a hyper-realistic baked pastry texture, wide anxious cartoon eyes, thin pencil moustache, expressive talking mouth, tiny cartoon arms and legs, small pastry crumbs floating around",
-      "voice_profile": {
-        "tts_voice_id": "ta_IN_male_fast_high",
-        "pitch": "+12Hz",
-        "speed": "1.15"
-      }
-    },
-    "maama_vayiru": {
-      "display_name": "Maama Vayiru",
-      "object_type": "Watermelon",
-      "catchphrase": "En vayithula puzhiya karaikaadheenga da!",
-      "reference_images": [
-        "/kaggle/input/cast-assets/maama_front.png",
-        "/kaggle/input/cast-assets/maama_angry.png"
-      ],
-      "sdxl_base_prompt": "anthropomorphic giant round pot-bellied dark green striped watermelon with a hyper-realistic glossy rind texture, thick bushy black handlebar moustache, heavy expressive eyebrows, lazy cheerful eyes, tiny white lungi wrapped around the bottom, tiny cartoon arms and legs",
+      "sdxl_base_prompt": "anthropomorphic muscular white tiger with striking black stripes and bright ice-blue eyes, noble tired face, wearing a sweat-stained faded blue checkered lungi and a worn-out grey cotton shirt with a towel over his shoulder",
       "voice_profile": {
         "tts_voice_id": "ta_IN_male_deep_warm",
-        "pitch": "-10Hz",
+        "pitch": "-6%",
+        "speed": "0.98"
+      }
+    },
+    "vellai_puli_vendhan_rich": {
+      "display_name": "Vellai Puli Vendhan (CEO)",
+      "species": "White Tiger (Multi-Millionaire)",
+      "reference_images": [
+        "/kaggle/input/cast-assets/vendhan_rich.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic powerful white tiger with immaculate snow-white fur, sharp black stripes, confident ice-blue eyes, wearing a tailored royal navy three-piece luxury business suit, gold watch, silk tie, billionaire CEO aura",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_male_deep_warm",
+        "pitch": "-8%",
         "speed": "0.95"
       }
     },
-    "rangeela_ramasaami": {
-      "display_name": "Rangeela Ramasaami",
-      "object_type": "Pineapple",
-      "catchphrase": "Mullu irukkuravan dhanda massu!",
+    "soppana_sundari": {
+      "display_name": "Soppana Sundari",
+      "species": "Lioness",
       "reference_images": [
-        "/kaggle/input/cast-assets/ramasaami_front.png",
-        "/kaggle/input/cast-assets/ramasaami_smirk.png"
+        "/kaggle/input/cast-assets/sundari_front.png"
       ],
-      "sdxl_base_prompt": "anthropomorphic flashy golden-yellow pineapple with a hyper-realistic textured skin, spiky green pineapple leaves styled like a dramatic slicked-back hair puff, wearing oversized retro neon tinted sunglasses, cocky smirking mouth, tiny gold chain, tiny cartoon arms and legs",
+      "sdxl_base_prompt": "anthropomorphic glamorous golden-tan female lioness with sleek fur, heavy eye makeup, arrogant arched eyebrows, wearing a flashy bright red designer silk saree with heavy gold jewelry and sunglasses",
+      "voice_profile": {
+        "tts_voice_id": "ta_IN_female_fiery",
+        "pitch": "+8%",
+        "speed": "1.08"
+      }
+    },
+    "vengai_mavan": {
+      "display_name": "Vengai Mavan",
+      "species": "Black Leopard",
+      "reference_images": [
+        "/kaggle/input/cast-assets/vengai_front.png"
+      ],
+      "sdxl_base_prompt": "anthropomorphic sleek jet-black panther leopard with glossy dark fur, sinister glowing amber eyes, smug grin, wearing a flashy black leather jacket with gold chains and tinted aviator sunglasses",
       "voice_profile": {
         "tts_voice_id": "ta_IN_male_dramatic",
-        "pitch": "+2Hz",
+        "pitch": "-4%",
         "speed": "1.05"
       }
     },
-    "mottai_murungakkai": {
-      "display_name": "Mottai Murungakkai",
-      "object_type": "Drumstick",
-      "catchphrase": "Ozhunga iru, illana odachi potruven!",
+    "super_subbaiah": {
+      "display_name": "Super Subbaiah",
+      "species": "White Tiger + Lion Hybrid Cub (Male)",
       "reference_images": [
-        "/kaggle/input/cast-assets/murungakkai_front.png"
+        "/kaggle/input/cast-assets/subbaiah_cub.png"
       ],
-      "sdxl_base_prompt": "anthropomorphic tall skinny green ribbed drumstick vegetable acting like an angry lecturing uncle, furrowed eyebrows, open shouting mouth, wobbling wildly, tiny cartoon arms and legs",
+      "sdxl_base_prompt": "adorable anthropomorphic 7-year-old male hybrid cub mixing white tiger and lion features, creamy snow-white fur with faint light-grey tiger stripes, fluffy golden-cream lion cub neck tuft and round lion ears, big innocent eyes, wearing a simple yellow t-shirt and shorts",
       "voice_profile": {
         "tts_voice_id": "ta_IN_male_fast_high",
-        "pitch": "+8Hz",
-        "speed": "1.20"
+        "pitch": "+22%",
+        "speed": "1.05"
       }
     },
-    "pattasu_pacha_milagai": {
-      "display_name": "Pattasu Pacha Milagai",
-      "object_type": "Green Chili",
-      "catchphrase": "Naan pathavecha koluthi poduven!",
+    "sandai_saroja": {
+      "display_name": "Sandai Saroja",
+      "species": "White Tiger + Lion Hybrid Cub (Female)",
       "reference_images": [
-        "/kaggle/input/cast-assets/milagai_front.png"
+        "/kaggle/input/cast-assets/saroja_cub.png"
       ],
-      "sdxl_base_prompt": "anthropomorphic fiery sharp slender bright green chili pepper with tiny puffs of cartoon smoke rising from its top green stem, raging fiery eyes, wide roasting mouth, aggressive stance, tiny cartoon arms and legs",
+      "sdxl_base_prompt": "adorable anthropomorphic 9-year-old female hybrid cub mixing white tiger and lion features, creamy white fur with delicate silver-grey tiger stripes, round lion cub ears with a small red hair ribbon, fierce protective big eyes, wearing a simple green pavadai sattai",
       "voice_profile": {
         "tts_voice_id": "ta_IN_female_fiery",
-        "pitch": "+15Hz",
-        "speed": "1.25"
+        "pitch": "+20%",
+        "speed": "1.10"
       }
     },
-    "thimiru_thengai": {
-      "display_name": "Thimiru Thengai",
-      "object_type": "Coconut",
-      "catchphrase": "En mandaiya udaikka mudiyuma unnala?",
+    "thanga_thamarai": {
+      "display_name": "Thanga Thamarai",
+      "species": "Golden Tigress",
       "reference_images": [
-        "/kaggle/input/cast-assets/thengai_front.png"
+        "/kaggle/input/cast-assets/thamarai_front.png"
       ],
-      "sdxl_base_prompt": "anthropomorphic stubborn hairy fibrous brown coconut shell with tiny surface hairline crack, defiant squinting eyes, stubborn frown, folded tiny wooden arms, tiny cartoon legs",
+      "sdxl_base_prompt": "anthropomorphic graceful golden-orange tigress with warm gentle hazel eyes, kind humble smile, jasmine flowers (mallipoo) tucked behind her ear, wearing a dignified pastel peach handloom cotton saree with a small bindi",
       "voice_profile": {
-        "tts_voice_id": "ta_IN_male_deep_warm",
-        "pitch": "-15Hz",
-        "speed": "0.90"
+        "tts_voice_id": "ta_IN_female_fiery",
+        "pitch": "-2%",
+        "speed": "0.95"
       }
     }
   }
