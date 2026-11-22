@@ -11,7 +11,7 @@ MANIFESTS_DIR = BASE_DIR / "manifests"
 CONFIG_DIR = BASE_DIR / "config"
 KAGGLE_DIR = BASE_DIR / "kaggle_worker"
 OUTPUT_ROOT = BASE_DIR / "rendered_clips"
-KERNEL_ID = "alexytcreative/alaparai-aruvadai-worker"
+KERNEL_ID = "alexytcreative/vellai-puli-vendhan-worker"
 
 def get_kaggle_cmd() -> str:
     system_kaggle = shutil.which("kaggle")
@@ -38,7 +38,11 @@ def stage_and_push(ep_id: str, poll_seconds: int = 40):
     manifest_data = json.loads(src_manifest.read_text(encoding="utf-8"))
     cast_data = json.loads((CONFIG_DIR / "characters.json").read_text(encoding="utf-8"))
 
-    # Embed data directly into render_episode.py
+    # Also save local copies in kaggle_worker folder
+    shutil.copy2(src_manifest, KAGGLE_DIR / "episode_manifest.json")
+    shutil.copy2(CONFIG_DIR / "characters.json", KAGGLE_DIR / "characters.json")
+
+    # Embed data directly into render_episode.py so it never depends on external files
     worker_script_path = KAGGLE_DIR / "render_episode.py"
     script_text = worker_script_path.read_text(encoding="utf-8")
 
@@ -46,23 +50,23 @@ def stage_and_push(ep_id: str, poll_seconds: int = 40):
     manifest_json_str = json.dumps(manifest_data, ensure_ascii=False, indent=2)
 
     script_text = re.sub(
-        r"CAST\s*=\s*\{.*?\n\}\n\nMANIFEST",
-        f"CAST = {cast_json_str}\n\nMANIFEST",
+        r"EMBEDDED_CAST\s*=\s*\{.*?\n\}\n\nEMBEDDED_MANIFEST",
+        f"EMBEDDED_CAST = {cast_json_str}\n\nEMBEDDED_MANIFEST",
         script_text,
         flags=re.DOTALL
     )
     script_text = re.sub(
-        r"MANIFEST\s*=\s*\{.*?\n\}\n\ndef clear_vram",
-        f"MANIFEST = {manifest_json_str}\n\ndef clear_vram",
+        r"EMBEDDED_MANIFEST\s*=\s*\{.*?\n\}\n\n# Load cast bible",
+        f"EMBEDDED_MANIFEST = {manifest_json_str}\n\n# Load cast bible",
         script_text,
         flags=re.DOTALL
     )
 
     worker_script_path.write_text(script_text, encoding="utf-8")
-    print(f"[{ep_id}] Staged self-contained worker code in {worker_script_path}")
+    print(f"[{ep_id}] Staged isolated worker code in {worker_script_path}")
 
     # Push to Kaggle GPU
-    print(f"[{ep_id}] Pushing kernel to Kaggle GPU...")
+    print(f"[{ep_id}] Pushing kernel to Kaggle GPU ({KERNEL_ID})...")
     res = subprocess.run([KAGGLE_CMD, "kernels", "push", "-p", str(KAGGLE_DIR)], capture_output=True, text=True)
     if res.returncode != 0:
         print(f"Error pushing to Kaggle:\n{res.stderr}\n{res.stdout}")

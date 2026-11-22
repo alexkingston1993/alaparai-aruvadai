@@ -1,6 +1,6 @@
 {
-  "id": "alexytcreative/alaparai-aruvadai-worker",
-  "title": "Alaparai Aruvadai Worker",
+  "id": "alexytcreative/vellai-puli-vendhan-worker",
+  "title": "Vellai Puli Vendhan Worker",
   "code_file": "render_episode.py",
   "language": "python",
   "kernel_type": "script",
@@ -9,7 +9,7 @@
   "enable_tpu": false,
   "enable_internet": true,
   "dataset_sources": [
-    "alexytcreative/sdxl-lightning-weights"
+    "alexytcreative/vellai-puli-cast-assets"
   ],
   "competition_sources": [],
   "kernel_sources": []

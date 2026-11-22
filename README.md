@@ -18,17 +18,20 @@ An emotional, high-stakes 4-part karma story packed with dramatic confrontation,
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Architecture & Isolation
 
 ```
-[1. Local Manifests]          --->    [2. Cloud GPU Renderer]     --->    [3. Local Assembly]
- manifests/ep_001_manifest.json        Kaggle Headless Worker              scripts/3_assemble_video.py
- (Prompts, Dialogues, SFX)             SDXL-Lightning + LTX-2.5            Edge-TTS + FFmpeg + ASS Subtitles
+[1. Local Manifests]          --->    [2. Isolated Cloud GPU]     --->    [3. Local Assembly]
+ manifests/ep_001_manifest.json        alexytcreative/                     scripts/3_assemble_video.py
+ (Prompts, Dialogues, SFX)             vellai-puli-vendhan-worker          Edge-TTS + FFmpeg + Pillow Subtitles
+                                       SDXL-Lightning + LTX-2.5 I2V
 ```
 
-1. **Stage 1 (Story & Cast Bible):** Character profiles in `config/characters.json` define exact SDXL prompts, voice profiles, pitch/speed shifts, and reference images.
-2. **Stage 2 (Cloud GPU Worker):** Headless Kaggle script (`kaggle_worker/render_episode.py`) generates 576×1024 starting keyframes (SDXL-Lightning 4-step) and animates full motion & lip gestures (LTX-Video I2V with sequential CPU offloading).
-3. **Stage 3 (Video & Audio Assembly):** Generates neural Tamil voiceovers via Edge-TTS, aligns video to speech timing, mixes viral meme sound effects and BGM, and burns high-contrast Tanglish karaoke subtitles.
+### 🔒 Project & Quota Isolation
+
+- **Dedicated Kernel Slug:** Uses `alexytcreative/vellai-puli-vendhan-worker` so packages, scripts, and output files never collide with other Kaggle projects.
+- **Shared Account Limits:** Kaggle free tier allocates 30 GPU hours/week across all kernels. Run episodes when other project GPU sessions are idle.
+- **Real LTX-Video I2V:** Stage 2 executes `LTXImageToVideoPipeline` (20-step distilled I2V) with sequential CPU offload and float16 precision optimized for Tesla T4 GPUs.
 
 ---
 
@@ -42,34 +45,20 @@ cd alaparai-aruvadai
 pip install -r requirements.txt
 ```
 
-Ensure `ffmpeg` is available on your machine:
-```bash
-brew install ffmpeg
-```
-
-### 2. Configure Kaggle Credentials
-
-Add your Kaggle username to `kaggle_worker/kernel-metadata.json`:
-```json
-{
-  "id": "YOUR_KAGGLE_USERNAME/tamil-ai-webseries-worker",
-  ...
-}
-```
-
-### 3. Run an Episode on Kaggle Cloud GPU
+### 2. Render on Kaggle Cloud GPU
 
 To render Episode 1 (or any episode `ep_001`–`ep_004`):
 ```bash
-python scripts/2_trigger_kaggle.py ep_001
+python3 scripts/2_trigger_kaggle.py ep_001
 ```
 
-This stages the episode manifest, pushes the job to Kaggle, monitors status until complete, and downloads all rendered `.mp4` clips to `rendered_clips/ep_001/`.
+This stages the episode manifest, pushes the dedicated worker kernel to Kaggle, monitors status until complete, and downloads all rendered `.mp4` clips to `rendered_clips/ep_001/`.
 
-### 4. Assemble Video with Voiceover & Subtitles
+### 3. Assemble Video with Voiceover & Subtitles
 
+The trigger script automatically calls assembly upon downloading clips, or you can run it manually:
 ```bash
-python scripts/3_assemble_video.py ep_001
+python3 scripts/3_assemble_video.py ep_001
 ```
 
 The final polished 1080×1920 vertical video will be saved to:
@@ -89,13 +78,13 @@ alaparai-aruvadai/
 │   ├── ep_003_manifest.json     # Episode 3: Kodeeswaran
 │   └── ep_004_manifest.json     # Episode 4: Karma & Kalyanam
 ├── kaggle_worker/
-│   ├── render_episode.py        # Headless SDXL-Lightning + LTX-2.5 script
-│   ├── kernel-metadata.json     # Kaggle GPU T4 x2 configuration
+│   ├── render_episode.py        # Headless SDXL-Lightning 8-step + LTX-Video I2V script
+│   ├── kernel-metadata.json     # Isolated worker ID: alexytcreative/vellai-puli-vendhan-worker
 │   └── episode_manifest.json    # Currently staged episode
 ├── scripts/
 │   ├── 1_generate_script.py     # LLM scriptwriting generator
-│   ├── 2_trigger_kaggle.py      # Multi-episode Kaggle GPU pusher & puller
-│   ├── 3_assemble_video.py      # Edge-TTS voice + FFmpeg assembly + ASS subtitles
+│   ├── 2_trigger_kaggle.py      # Isolated Kaggle GPU pusher & puller
+│   ├── 3_assemble_video.py      # Edge-TTS voice + FFmpeg assembly + Pillow subtitles
 │   └── 4_generate_thumbnail.py   # High-contrast cover generator
 ├── assets/
 │   ├── sfx/                     # Meme sound effect mp3s (vine_boom, record_scratch, etc.)
