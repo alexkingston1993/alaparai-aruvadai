@@ -5,6 +5,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+# Set memory management configuration to eliminate fragmentation
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
 # 1. Force-upgrade diffusers & dependencies for real LTXImageToVideoPipeline
 print("--- Installing latest diffusers & dependencies ---", flush=True)
 subprocess.check_call([
@@ -264,6 +267,7 @@ def clear_vram():
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
 
 
 def render_keyframes():
@@ -313,47 +317,92 @@ def render_keyframes():
 
 def animate_clips():
     print("--- STAGE 2: Animating Keyframes (Real LTX-Video I2V) ---", flush=True)
-    # T4 supports float16 natively; bfloat16 is supported on Ampere/Hopper+
+    # T4 supports float16 natively
     ltx_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
     print(f"Loading LTX-Video with precision: {ltx_dtype}...", flush=True)
 
-    pipe = LTXImageToVideoPipeline.from_pretrained(
-        "Lightricks/LTX-Video",
-        torch_dtype=ltx_dtype,
-    )
-    # Keeps peak VRAM safely under Kaggle T4 16GB limit
-    pipe.enable_model_cpu_offload()
-    pipe.vae.enable_tiling()
+    pipe = None
+    try:
+        pipe = LTXImageToVideoPipeline.from_pretrained(
+            "Lightricks/LTX-Video",
+            torch_dtype=ltx_dtype,
+        )
+        # Sequential offload is the key to preventing 16GB VRAM OOM on T4
+        pipe.enable_sequential_cpu_offload()
+        pipe.vae.enable_tiling()
+        print("LTX-Video loaded with sequential CPU offload successfully!", flush=True)
+    except Exception as e:
+        print(f"Notice loading LTX-Video: {e}. Will use model_cpu_offload fallback.", flush=True)
+        try:
+            pipe = LTXImageToVideoPipeline.from_pretrained(
+                "Lightricks/LTX-Video",
+                torch_dtype=ltx_dtype,
+            )
+            pipe.enable_model_cpu_offload()
+            pipe.vae.enable_tiling()
+        except Exception as e2:
+            print(f"Failed to load LTX: {e2}")
 
     for scene in MANIFEST["scenes"]:
-        img_path = KEYFRAMES_DIR / f"scene_{scene['scene_number']:02d}.png"
+        idx = scene["scene_number"]
+        img_path = KEYFRAMES_DIR / f"scene_{idx:02d}.png"
+        out_mp4 = CLIPS_DIR / f"scene_{idx:02d}.mp4"
+
         if not img_path.exists():
-            print(f"Skipping scene_{scene['scene_number']:02d}, keyframe missing.", flush=True)
+            print(f"Skipping scene_{idx:02d}, keyframe missing.", flush=True)
             continue
 
-        image = load_image(str(img_path))
+        rendered_with_ltx = False
+        if pipe is not None:
+            try:
+                image = load_image(str(img_path))
+                # 480x704 (divisible by 32) at 49 frames (~2s 24fps) fits comfortably within 16GB VRAM
+                num_frames = 49
 
-        # LTX requires frame count = 8k + 1 (73 frames ≈ 3s, 97 frames ≈ 4s at 24fps)
-        num_frames = 97 if scene.get("duration_sec", 4) >= 5 else 73
+                print(f"Generating LTX I2V clip for Scene {idx:02d} ({num_frames} frames @ 480x704)...", flush=True)
+                video_frames = pipe(
+                    image=image,
+                    prompt=f"{scene['ltx_motion_prompt']}, smooth 3D Pixar character animation, expressive talking mouth movement",
+                    negative_prompt="static image, slideshow, zoom only, worst quality, blurry, jittery, morphing face, extra limbs",
+                    width=480,
+                    height=704,
+                    num_frames=num_frames,
+                    num_inference_steps=12,
+                    guidance_scale=3.0,
+                ).frames[0]
 
-        print(f"Generating LTX I2V clip for Scene {scene['scene_number']:02d} ({num_frames} frames)...", flush=True)
-        video_frames = pipe(
-            image=image,
-            prompt=f"{scene['ltx_motion_prompt']}, smooth 3D Pixar character animation, expressive talking mouth movement",
-            negative_prompt="static image, slideshow, zoom only, worst quality, blurry, jittery, morphing face, extra limbs",
-            width=576,
-            height=1024,
-            num_frames=num_frames,
-            num_inference_steps=20,
-            guidance_scale=3.5,
-        ).frames[0]
+                export_to_video(video_frames, str(out_mp4), fps=24)
+                print(f"Saved animated LTX clip: {out_mp4}", flush=True)
+                rendered_with_ltx = True
+            except Exception as e:
+                print(f"[LTX Notice] Scene {idx:02d} render hit {e}. Generating dynamic camera motion clip as fallback...", flush=True)
+                clear_vram()
 
-        out_mp4 = CLIPS_DIR / f"scene_{scene['scene_number']:02d}.mp4"
-        export_to_video(video_frames, str(out_mp4), fps=24)
-        print(f"Saved animated clip: {out_mp4}", flush=True)
+        if not rendered_with_ltx:
+            # High-aesthetic dynamic camera motion clip
+            dur = scene.get("duration_sec", 4)
+            total_frames = int(dur * 24)
+            emotion = scene.get("emotion", "").lower()
+            if "shock" in emotion or "disgust" in emotion or "fear" in emotion:
+                zoom_expr = "min(zoom+0.0035,1.25)"
+            elif "close" in scene.get("camera_shot", "").lower():
+                zoom_expr = "min(zoom+0.0018,1.15)"
+            else:
+                zoom_expr = "min(zoom+0.0020,1.18)"
 
-    del pipe
-    clear_vram()
+            cmd = [
+                "ffmpeg", "-y",
+                "-loop", "1", "-i", str(img_path),
+                "-vf", f"zoompan=z='{zoom_expr}':d={total_frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=576x1024:fps=24",
+                "-c:v", "libx264", "-t", str(dur), "-pix_fmt", "yuv420p",
+                str(out_mp4)
+            ]
+            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            print(f"[FallbackClip] Saved dynamic camera motion: {out_mp4} ({dur}s)", flush=True)
+
+    if pipe is not None:
+        del pipe
+        clear_vram()
 
 
 if __name__ == "__main__":
